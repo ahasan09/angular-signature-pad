@@ -1,78 +1,101 @@
-# angular2-signaturepad
-Angular 2 component for [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
+# Angular Signature Pad
 
-# No Longer Maintained
-<< THIS IS NO LONGER IN USE BY OWNER. PROBLEMS CAN AND DO EXIST. PRs ARE SUPER WELCOME, BUT I CAN NOT IDENTIFY WHAT YOUR ISSUES ARE, NOR WILL I CHANGE THINGS BECAUSE ANGULAR HAS CHANGED IN THE YEARS SINCE I WROTE THIS. I DO NOT USE THIS, I CAN'T HELP YOU WITH YOUR PROBLEMS. >>
+An Angular component that provides a signature drawing canvas powered by [szimek/signature_pad](https://www.npmjs.com/package/signature_pad). Allows users to draw, capture, and export handwritten signatures as base64 images.
 
-## Install
-`npm install angular2-signaturepad --save`
+## Features
 
-## Reference Implementation
+- Smooth signature drawing on a `<canvas>` element
+- Configurable canvas dimensions
+- Export signature as PNG/JPEG data URL
+- Clear the canvas programmatically
+- Angular 2+ compatible
 
-* [Live Demo](http://lathonez.com/angular2-signaturepad-demo/)
-* [Source](https://github.com/lathonez/angular2-signaturepad-demo)
+## Tech Stack
 
-## Usage example
+- Angular 2+
+- TypeScript
+- signature_pad
 
-API is identical to [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
+## Prerequisites
 
-Options are as per [szimek/signature_pad](https://www.npmjs.com/package/signature_pad) with the following additions:
-* canvasWidth: width of the canvas (px)
-* canvasHeight: height of the canvas (px)
-The above options are provided to avoid accessing the DOM directly from your component to adjust the canvas size.
+- [Node.js](https://nodejs.org/) v10+
+- Angular CLI: `npm install -g @angular/cli`
+
+## Getting Started
+
+```bash
+git clone https://github.com/ahasan09/angular-signature-pad
+cd angular-signature-pad
+npm install
+ng serve
+```
+
+Open [http://localhost:4200](http://localhost:4200).
+
+## Usage in Your Project
+
+### 1. Install
+
+```bash
+npm install angular2-signaturepad --save
+```
+
+### 2. Import the module
 
 ```typescript
-
-// import into app module
-
 import { SignaturePadModule } from 'angular2-signaturepad';
 
-...
-
 @NgModule({
-  declarations: [ ],
   imports: [ SignaturePadModule ],
-  providers: [ ],
-  bootstrap: [ AppComponent ]
 })
+export class AppModule {}
+```
 
-// then import for use in a component
+### 3. Use in a component
 
-import { Component, ViewChild } from 'angular2/core';
+```typescript
+import { Component, ViewChild } from '@angular/core';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 @Component({
-  template: '<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>'
+  template: `
+    <signature-pad
+      [options]="signaturePadOptions"
+      (onBeginEvent)="drawStart()"
+      (onEndEvent)="drawComplete()">
+    </signature-pad>
+    <button (click)="clear()">Clear</button>
+    <button (click)="save()">Save</button>
+  `
 })
-
-export class SignaturePadPage{
-
+export class MyComponent {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-    'minWidth': 5,
-    'canvasWidth': 500,
-    'canvasHeight': 300
+  signaturePadOptions = {
+    minWidth: 2,
+    canvasWidth: 500,
+    canvasHeight: 300
   };
 
-  constructor() {
-    // no-op
-  }
-
-  ngAfterViewInit() {
-    // this.signaturePad is now available
-    this.signaturePad.set('minWidth', 5); // set szimek/signature_pad options at runtime
-    this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
-  }
-
   drawComplete() {
-    // will be notified of szimek/signature_pad's onEnd event
-    console.log(this.signaturePad.toDataURL());
+    console.log(this.signaturePad.toDataURL()); // base64 PNG
   }
 
-  drawStart() {
-    // will be notified of szimek/signature_pad's onBegin event
-    console.log('begin drawing');
+  clear() {
+    this.signaturePad.clear();
+  }
+
+  save() {
+    const dataURL = this.signaturePad.toDataURL('image/jpeg');
+    // upload or use dataURL
   }
 }
 ```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `ng serve` | Start dev server on port 4200 |
+| `ng build --prod` | Production build |
+| `ng test` | Run unit tests |
