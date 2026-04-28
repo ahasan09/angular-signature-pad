@@ -8,11 +8,11 @@ An Angular component that provides a signature drawing canvas powered by [szimek
 - Configurable canvas dimensions
 - Export signature as PNG/JPEG data URL
 - Clear the canvas programmatically
-- Angular 2+ compatible
+- Angular 19+ compatible
 
 ## Tech Stack
 
-- Angular 2+
+- Angular 19+
 - TypeScript
 - signature_pad
 
@@ -40,15 +40,16 @@ Open [http://localhost:4200](http://localhost:4200).
 npm install angular2-signaturepad --save
 ```
 
-### 2. Import the module
+### 2. Import the standalone component
 
 ```typescript
-import { SignaturePadModule } from 'angular2-signaturepad';
+import { SignaturePad } from 'angular2-signaturepad';
 
-@NgModule({
-  imports: [ SignaturePadModule ],
+@Component({
+  standalone: true,
+  imports: [ SignaturePad ],
 })
-export class AppModule {}
+export class AppComponent {}
 ```
 
 ### 3. Use in a component
@@ -99,3 +100,9 @@ export class MyComponent {
 | `ng serve` | Start dev server on port 4200 |
 | `ng build --prod` | Production build |
 | `ng test` | Run unit tests |
+
+## Additional Resources
+
+- Changelog: `CHANGELOG.md`
+- Library README: `projects/ahasan-angular2-signaturepad/README.md`
+- StackBlitz demo: https://stackblitz.com/edit/angular-signature-pad-demo

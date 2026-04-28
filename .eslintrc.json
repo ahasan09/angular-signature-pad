@@ -1,0 +1,43 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "dist",
+    "coverage",
+    "node_modules"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "projects/ahasan-angular2-signaturepad/tsconfig.lib.json",
+          "projects/ahasan-angular2-signaturepad/tsconfig.spec.json"
+        ],
+        "sourceType": "module"
+      },
+      "plugins": [
+        "@typescript-eslint",
+        "@angular-eslint"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "signature",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/no-output-on-prefix": "off",
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
+  ]
+}

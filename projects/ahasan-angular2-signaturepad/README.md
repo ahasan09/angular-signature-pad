@@ -1,5 +1,5 @@
 # ahasan-angular2-signaturepad
-Angular 2 component for [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
+Angular 19 standalone component wrapper for [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
 
 ## Install
 `npm install ahasan-angular2-signaturepad --save`
@@ -7,6 +7,7 @@ Angular 2 component for [szimek/signature_pad](https://www.npmjs.com/package/sig
 ## Reference Implementation
 
 * [Source](https://github.com/ahasan09/ahasan-angular2-signaturepad)
+* [Live Demo (StackBlitz)](https://stackblitz.com/edit/angular-signature-pad-demo)
 
 ## Usage example
 
@@ -19,33 +20,20 @@ The above options are provided to avoid accessing the DOM directly from your com
 
 ```typescript
 
-// import into app module
-
-import { SignaturePadModule } from 'ahasan-angular2-signaturepad';
-
-...
-
-@NgModule({
-  declarations: [ ],
-  imports: [ SignaturePadModule ],
-  providers: [ ],
-  bootstrap: [ AppComponent ]
-})
-
-// then import for use in a component
-
 import { Component, ViewChild } from '@angular/core';
-import { SignaturePad } from 'ahasan-angular2-signaturepad';
+import { SignaturePad, SignaturePadConfig } from 'ahasan-angular2-signaturepad';
 
 @Component({
-  template: '<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>'
+  standalone: true,
+  imports: [SignaturePad],
+  template: '<signature-pad [options]="signaturePadOptions" [minWidth]="2" [maxWidth]="5" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>'
 })
 
 export class SignaturePadPage{
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
+  private signaturePadOptions: SignaturePadConfig = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
     'canvasWidth': 500,
     'canvasHeight': 300
@@ -72,3 +60,8 @@ export class SignaturePadPage{
   }
 }
 ```
+
+## Accessibility
+
+The canvas is rendered with `role="img"` and a default `aria-label="Signature drawing area"`.
+Because digital signing is inherently pointer-based, keyboard-only alternatives are not fully equivalent. Applications should provide an alternate non-canvas verification workflow for keyboard-only and assistive-technology users.

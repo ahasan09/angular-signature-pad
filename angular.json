@@ -32,5 +32,8 @@
       }
     }
   },
-  "defaultProject": "ahasan-angular2-signaturepad"
+  "defaultProject": "ahasan-angular2-signaturepad",
+  "cli": {
+    "analytics": false
+  }
 }
