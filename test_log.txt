@@ -1,0 +1,38 @@
+
+> ahasan-angular2-signaturepad@2.0.0 test
+> ng test ahasan-angular2-signaturepad --watch=false --browsers=ChromeHeadless --code-coverage
+
+Node.js version v25.9.0 detected.
+Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
+Workspace extension with invalid name (defaultProject) found.
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+[32m29 04 2026 00:57:03.613:INFO [karma-server]: [39mKarma v6.4.4 server started at http://localhost:9876/
+[32m29 04 2026 00:57:03.614:INFO [launcher]: [39mLaunching browsers ChromeHeadless with concurrency unlimited
+[32m29 04 2026 00:57:03.616:INFO [launcher]: [39mStarting browser ChromeHeadless
+[32m29 04 2026 00:57:04.723:INFO [Chrome Headless 147.0.0.0 (Mac OS 10.15.7)]: [39mConnected on socket gyNZ0oduUPDLa5KRAAAB with id 12970645
+Chrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 0 of 13[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 1 of 13[32m SUCCESS[39m (0 secs / 0.018 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 2 of 13[32m SUCCESS[39m (0 secs / 0.02 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 3 of 13[32m SUCCESS[39m (0 secs / 0.021 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 4 of 13[32m SUCCESS[39m (0 secs / 0.022 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 5 of 13[32m SUCCESS[39m (0 secs / 0.023 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 6 of 13[32m SUCCESS[39m (0 secs / 0.024 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 7 of 13[32m SUCCESS[39m (0 secs / 0.025 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 8 of 13[32m SUCCESS[39m (0 secs / 0.026 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 9 of 13[32m SUCCESS[39m (0 secs / 0.026 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 10 of 13[32m SUCCESS[39m (0 secs / 0.026 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 11 of 13[32m SUCCESS[39m (0 secs / 0.027 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 12 of 13[32m SUCCESS[39m (0 secs / 0.027 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 13 of 13[32m SUCCESS[39m (0 secs / 0.028 secs)
+[1A[2KChrome Headless 147.0.0.0 (Mac OS 10.15.7): Executed 13 of 13[32m SUCCESS[39m (0.032 secs / 0.028 secs)
+[32mTOTAL: 13 SUCCESS[39m
+
+=============================== Coverage summary ===============================
+Statements   : 83.51% ( 76/91 )
+Branches     : 58.82% ( 30/51 )
+Functions    : 100% ( 19/19 )
+Lines        : 83.51% ( 76/91 )
+================================================================================
+✔ Browser application bundle generation complete.
+✔ Browser application bundle generation complete.

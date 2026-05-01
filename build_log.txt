@@ -1,0 +1,30 @@
+
+> ahasan-angular2-signaturepad@2.0.0 build
+> ng build ahasan-angular2-signaturepad
+
+Node.js version v25.9.0 detected.
+Odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.
+Workspace extension with invalid name (defaultProject) found.
+Building Angular Package
+
+------------------------------------------------------------------------------
+Building entry point 'ahasan-angular2-signaturepad'
+------------------------------------------------------------------------------
+- Compiling with Angular sources in Ivy full compilation mode.
+✔ Compiling with Angular sources in Ivy full compilation mode.
+- Writing FESM bundles
+✔ Writing FESM bundles
+- Copying assets
+✔ Copying assets
+- Writing package manifest
+✔ Writing package manifest
+✔ Built ahasan-angular2-signaturepad
+
+------------------------------------------------------------------------------
+Built Angular Package
+ - from: /Users/abulhasan/Desktop/Programming/Github_Projects/angular-signature-pad/projects/ahasan-angular2-signaturepad
+ - to:   /Users/abulhasan/Desktop/Programming/Github_Projects/angular-signature-pad/dist/ahasan-angular2-signaturepad
+------------------------------------------------------------------------------
+
+Build at: 2026-04-28T18:57:06.259Z - Time: 570ms
+
