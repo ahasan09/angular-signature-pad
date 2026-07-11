@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0 - 2026-07-11
+- Upgrade to Angular 22 (from 19); TypeScript 6, zone.js 0.16
+- signature_pad 5.1.3; ng-packagr 22
+- Widen library peerDependencies to Angular >=19
+- Migrate to ESLint flat config (eslint 10, angular-eslint 22, typescript-eslint 8)
+
+
 ## 2.0.0 - 2026-04-28
 
 ### Added

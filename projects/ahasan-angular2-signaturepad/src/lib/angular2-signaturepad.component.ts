@@ -19,7 +19,7 @@ export interface Point {
   time: number;
 }
 
-export type PointGroup = Array<Point>;
+export type PointGroup = Point[];
 
 export interface SignaturePadConfig {
   minWidth?: number;
@@ -71,8 +71,8 @@ export class SignaturePadComponent
   private signaturePad: {
     _canvas: HTMLCanvasElement;
     clear: () => void;
-    toData: () => Array<PointGroup>;
-    fromData: (points: Array<PointGroup>) => void;
+    toData: () => PointGroup[];
+    fromData: (points: PointGroup[]) => void;
     toDataURL: (imageType?: string, quality?: number) => string;
     fromDataURL: (dataURL: string, options?: Record<string, unknown>) => void;
     isEmpty: () => boolean;
@@ -179,7 +179,7 @@ export class SignaturePadComponent
   }
 
   // Returns signature image as an array of point groups
-  public toData(): Array<PointGroup> {
+  public toData(): PointGroup[] {
     if (this.signaturePad) {
       return this.signaturePad.toData();
     }
@@ -188,7 +188,7 @@ export class SignaturePadComponent
   }
 
   // Draws signature image from an array of point groups
-  public fromData(points: Array<PointGroup>): void {
+  public fromData(points: PointGroup[]): void {
     this.signaturePad?.fromData(points);
   }
 

@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/ahasan09/ahasan-angular2-signaturepad#readme",
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0",
+    "@angular/common": ">=19.0.0",
+    "@angular/core": ">=19.0.0",
     "signature_pad": "^5.0.9"
   },
   "dependencies": {

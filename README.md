@@ -8,11 +8,11 @@ An Angular component that provides a signature drawing canvas powered by [szimek
 - Configurable canvas dimensions
 - Export signature as PNG/JPEG data URL
 - Clear the canvas programmatically
-- Angular 19+ compatible
+- Angular 22+ compatible
 
 ## Tech Stack
 
-- Angular 19+
+- Angular 22+
 - TypeScript
 - signature_pad
 

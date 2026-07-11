@@ -2,7 +2,7 @@
 
 import {AfterContentInit, Component, ElementRef, EventEmitter, Input, Output, OnDestroy} from '@angular/core';
 
-declare var require: any;
+declare let require: any;
 
 export interface Point {
   x: number;
@@ -10,7 +10,7 @@ export interface Point {
   time: number;
 }
 
-export type PointGroup = Array<Point>;
+export type PointGroup = Point[];
 
 @Component({
   template: '<canvas></canvas>',
@@ -19,7 +19,7 @@ export type PointGroup = Array<Point>;
 
 export class SignaturePad implements AfterContentInit, OnDestroy {
 
-  @Input() public options: Object;
+  @Input() public options: object;
   @Output() public onBeginEvent: EventEmitter<boolean>;
   @Output() public onEndEvent: EventEmitter<boolean>;
 
@@ -70,7 +70,7 @@ export class SignaturePad implements AfterContentInit, OnDestroy {
   }
 
   // Returns signature image as an array of point groups
-  public toData(): Array<PointGroup> {
+  public toData(): PointGroup[] {
     if (this.signaturePad) {
       return this.signaturePad.toData();
     } else {
@@ -79,7 +79,7 @@ export class SignaturePad implements AfterContentInit, OnDestroy {
   }
 
   // Draws signature image from an array of point groups
-  public fromData(points: Array<PointGroup>): void {
+  public fromData(points: PointGroup[]): void {
     this.signaturePad.fromData(points);
   }
 
