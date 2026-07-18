@@ -1,5 +1,5 @@
 {
-  "name": "ahasan-angular2-signaturepad",
+  "name": "angular-signature-pad",
   "version": "2.0.0",
   "scripts": {
     "ng": "ng",
