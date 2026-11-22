@@ -13,3 +13,4 @@ Maintenance branch for Angular 13–15 with signature_pad 4.x. The newest line (
 - `@types/node` is pinned to 12.20.55 via `overrides`: rxjs 7.5 references Node types, and newer versions don't compile on TypeScript 4.6.
 - signature_pad 4: `beginStroke`/`endStroke` detail is the raw `MouseEvent | Touch | PointerEvent`; `BasicPoint` and `FromDataUrlOptions` aren't exported.
 - `scripts/compat` + `.github/workflows/compat.yml` verify the packed tarball in real apps on every Angular version of this line. Keep the matrix in sync with peerDependencies.
+- Publishing uses npm trusted publishing (OIDC, no token). The publish step switches to Node 24 + npm 11 after building on the line's own Node.
