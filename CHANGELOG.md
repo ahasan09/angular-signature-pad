@@ -1,4 +1,4 @@
-# Changelog — @ahasan09/ngx-signature-pad 2.x (Angular 16–18)
+# Changelog — @raju_hasan09/ngx-signature-pad 2.x (Angular 16–18)
 
 This branch (`release/v2`) maintains the 2.x line for Angular 16–18 with signature_pad 5.x. It publishes to npm under the `angular16-18` dist-tag; the newest line (3.x, Angular 19–22) lives on `main` and is `latest`.
 

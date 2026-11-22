@@ -1,6 +1,6 @@
 # Angular Signature Pad — 2.x (Angular 16–18)
 
-This is the `release/v2` branch of [`@ahasan09/ngx-signature-pad`](https://www.npmjs.com/package/@ahasan09/ngx-signature-pad). It maintains the **2.x** line for **Angular 16–18** with **signature_pad 5.x**.
+This is the `release/v2` branch of [`@raju_hasan09/ngx-signature-pad`](https://www.npmjs.com/package/@raju_hasan09/ngx-signature-pad). It maintains the **2.x** line for **Angular 16–18** with **signature_pad 5.x**.
 
 The newest line (3.x, Angular 19–22) is on `main`, which also documents all release lines and the release process.
 

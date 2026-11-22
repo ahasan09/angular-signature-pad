@@ -1,4 +1,4 @@
-# @ahasan09/ngx-signature-pad — 2.x line (branch release/v2)
+# @raju_hasan09/ngx-signature-pad — 2.x line (branch release/v2)
 
 Maintenance branch for Angular 16–18 with signature_pad 5.x. The newest line (3.x, Angular 19–22) and the release overview live on `main`.
 
