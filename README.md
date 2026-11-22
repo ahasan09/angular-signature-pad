@@ -2,6 +2,8 @@
 
 Source for **[`@raju_hasan09/ngx-signature-pad`](https://www.npmjs.com/package/@raju_hasan09/ngx-signature-pad)**, an Angular component wrapping [szimek/signature_pad](https://www.npmjs.com/package/signature_pad). It replaces `ahasan-angular2-signaturepad`.
 
+**[Live demo](https://ahasan09.github.io/angular-signature-pad/)**: built from `main` and deployed to GitHub Pages on every push (`.github/workflows/demo.yml`).
+
 For installation, usage and the API, see the [library README](projects/ngx-signature-pad/README.md). It is also the README published to npm.
 
 ## Release lines

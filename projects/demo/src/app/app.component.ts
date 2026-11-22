@@ -30,6 +30,14 @@ interface LogEntry {
           Demo of <code>@raju_hasan09/ngx-signature-pad</code>: an Angular standalone component
           wrapping <a href="https://github.com/szimek/signature_pad">signature_pad</a>.
         </p>
+        <p class="links">
+          <code>npm i @raju_hasan09/ngx-signature-pad signature_pad</code>
+          <span>
+            <a href="https://www.npmjs.com/package/@raju_hasan09/ngx-signature-pad">npm</a> ·
+            <a href="https://github.com/ahasan09/angular-signature-pad">GitHub</a> ·
+            <a href="https://github.com/ahasan09/angular-signature-pad/tree/main/projects/ngx-signature-pad#readme">Docs</a>
+          </span>
+        </p>
       </header>
 
       <section class="card" aria-labelledby="pad-heading">
