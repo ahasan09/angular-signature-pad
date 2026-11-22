@@ -20,10 +20,7 @@
       "dom"
     ],
     "paths": {
-      "ahasan-angular2-signaturepad": [
-        "dist/ahasan-angular2-signaturepad/ahasan-angular2-signaturepad",
-        "dist/ahasan-angular2-signaturepad"
-      ]
+      "@ahasan09/ngx-signature-pad": ["dist/ngx-signature-pad"]
     },
     "baseUrl": "./",
     "ignoreDeprecations": "6.0"
