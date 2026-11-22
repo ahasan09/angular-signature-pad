@@ -25,7 +25,7 @@ The Angular 16–18 build toolchain is past end-of-life and `npm audit` reports 
 
 1. Bump `version` in `projects/ngx-signature-pad/package.json` (it must stay 2.x) and add a `CHANGELOG.md` entry.
 2. Commit on this branch, tag `v2.Y.Z`, and push the tag.
-3. The `Publish` workflow tests, builds and publishes with npm provenance under the `angular16-18` dist-tag.
+3. The `Publish` workflow tests, builds and publishes with npm provenance under the `angular16-18` dist-tag, using npm trusted publishing (no npm token; see `main`'s README).
 
 ## License
 
