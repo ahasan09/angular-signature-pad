@@ -1,5 +1,10 @@
 name: Publish (2.x, Angular 16-18)
 
+# Publishes with npm trusted publishing (OIDC): npm exchanges this workflow's
+# GitHub identity token for a short-lived publish credential, so no npm token
+# is stored in the repository. The trusted publisher is configured on
+# npmjs.com for this repository and the workflow file name "publish.yml".
+
 on:
   push:
     tags:
@@ -7,7 +12,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # npm provenance
+  id-token: write # trusted publishing (OIDC) and provenance
 
 jobs:
   publish:
@@ -21,12 +26,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # No dependency cache in release builds (npm's recommendation for publishing).
+      - name: Setup Node.js 18 (build and test)
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          registry-url: https://registry.npmjs.org
-          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -43,6 +47,8 @@ jobs:
             exit 1
           fi
 
+      # Only the published runtime dependencies (signature_pad, tslib) are audited.
+      # The Angular 16-18 build toolchain is end-of-life and has known, unfixable advisories.
       - name: Audit published dependencies
         run: npm audit --omit=dev --audit-level=moderate
 
@@ -52,7 +58,18 @@ jobs:
       - name: Build library
         run: npm run build
 
+      # Trusted publishing needs npm >= 11.5.1 and Node >= 22.14, independent of
+      # the Node version used to build this line.
+      - name: Setup Node.js 24 (publish)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Use npm 11
+        run: |
+          npm install -g npm@^11.5.1
+          npm --version
+
       - name: Publish package
         run: npm publish ./dist/ngx-signature-pad --access public --provenance --tag "$DIST_TAG"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

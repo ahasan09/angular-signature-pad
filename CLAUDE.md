@@ -10,3 +10,4 @@ Maintenance branch for Angular 16–18 with signature_pad 5.x. The newest line (
 - Tests use the real signature_pad with dispatched PointerEvents (Karma + Jasmine). Don't mock the library.
 - `npm audit --omit=dev` must stay clean (runtime deps are only signature_pad + tslib); the EOL toolchain's dev advisories are expected.
 - `scripts/compat` + `.github/workflows/compat.yml` verify the packed tarball in real apps on every Angular version of this line. Keep the matrix in sync with peerDependencies.
+- Publishing uses npm trusted publishing (OIDC, no token). The publish step switches to Node 24 + npm 11 after building on the line's own Node.
