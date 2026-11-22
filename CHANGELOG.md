@@ -1,6 +1,6 @@
 # Changelog
 
-`@ahasan09/ngx-signature-pad` replaces `ahasan-angular2-signaturepad` (last release 1.0.0, Angular 12–13, signature_pad 2).
+`@raju_hasan09/ngx-signature-pad` replaces `ahasan-angular2-signaturepad` (last release 1.0.0, Angular 12–13, signature_pad 2).
 It is published in three release lines, one per Angular range:
 
 | Line | Angular | signature_pad | Branch | npm dist-tag |
@@ -11,7 +11,7 @@ It is published in three release lines, one per Angular range:
 
 ## 3.0.0 - Unreleased
 
-First release of `@ahasan09/ngx-signature-pad` 3.x (Angular 19–22).
+First release of `@raju_hasan09/ngx-signature-pad` 3.x (Angular 19–22).
 
 ### Fixed (compared with `ahasan-angular2-signaturepad`)
 - `onBeginEvent` / `onEndEvent` fire again. signature_pad 4+ removed the `onBegin`/`onEnd` callbacks the old wrapper relied on.

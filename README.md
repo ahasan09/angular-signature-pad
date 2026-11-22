@@ -1,6 +1,6 @@
 # Angular Signature Pad
 
-Source for **[`@ahasan09/ngx-signature-pad`](https://www.npmjs.com/package/@ahasan09/ngx-signature-pad)**, an Angular component wrapping [szimek/signature_pad](https://www.npmjs.com/package/signature_pad). It replaces `ahasan-angular2-signaturepad`.
+Source for **[`@raju_hasan09/ngx-signature-pad`](https://www.npmjs.com/package/@raju_hasan09/ngx-signature-pad)**, an Angular component wrapping [szimek/signature_pad](https://www.npmjs.com/package/signature_pad). It replaces `ahasan-angular2-signaturepad`.
 
 For installation, usage and the API, see the [library README](projects/ngx-signature-pad/README.md). It is also the README published to npm.
 
@@ -41,7 +41,7 @@ CI (`.github/workflows/compat.yml`) installs the packed library into a fresh app
 
 ```bash
 npm run build && npm pack ./dist/ngx-signature-pad --pack-destination /tmp
-bash scripts/compat/make-app.sh 20 "~5.8.0" /tmp/app-ng20 /tmp/ahasan09-ngx-signature-pad-3.0.0.tgz "^5.0.0" signals zone
+bash scripts/compat/make-app.sh 20 "~5.8.0" /tmp/app-ng20 /tmp/raju_hasan09-ngx-signature-pad-3.0.0.tgz "^5.0.0" signals zone
 node scripts/compat/check-app.cjs /tmp/app-ng20/dist
 ```
 
@@ -54,14 +54,6 @@ Each release branch has the same check for its own Angular range.
 3. That branch's `Publish` workflow tests, builds and publishes with npm provenance, under the line's dist-tag. It refuses to publish if the tag, version or release line don't match. It needs the `NPM_TOKEN` repository secret.
 
 `latest` must always point to the newest line, which is why the older lines publish under their own dist-tags.
-
-### One-time, after the first releases
-
-Point users of the old package to the new one:
-
-```bash
-npm deprecate ahasan-angular2-signaturepad "Moved to @ahasan09/ngx-signature-pad (1.x: Angular 13-15, 2.x: 16-18, 3.x: 19-22)"
-```
 
 ## License
 

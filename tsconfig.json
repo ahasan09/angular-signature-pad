@@ -20,7 +20,7 @@
       "dom"
     ],
     "paths": {
-      "@ahasan09/ngx-signature-pad": ["dist/ngx-signature-pad"]
+      "@raju_hasan09/ngx-signature-pad": ["dist/ngx-signature-pad"]
     },
     "baseUrl": "./",
     "ignoreDeprecations": "6.0"

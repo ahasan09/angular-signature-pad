@@ -11,7 +11,7 @@ import {
   SignaturePadComponent,
   SignaturePadConfig,
   SignatureStrokeEvent,
-} from '@ahasan09/ngx-signature-pad';
+} from '@raju_hasan09/ngx-signature-pad';
 
 interface LogEntry {
   id: number;
@@ -27,7 +27,7 @@ interface LogEntry {
       <header>
         <h1>Signature Pad</h1>
         <p>
-          Demo of <code>@ahasan09/ngx-signature-pad</code>: an Angular standalone component
+          Demo of <code>@raju_hasan09/ngx-signature-pad</code>: an Angular standalone component
           wrapping <a href="https://github.com/szimek/signature_pad">signature_pad</a>.
         </p>
       </header>
