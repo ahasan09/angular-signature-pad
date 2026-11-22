@@ -1,6 +1,6 @@
 {
   "name": "@raju_hasan09/ngx-signature-pad",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Angular standalone component wrapper for szimek/signature_pad — capture handwritten signatures on a canvas.",
   "repository": {
     "type": "git",

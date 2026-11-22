@@ -9,7 +9,12 @@ It is published in three release lines, one per Angular range:
 | 2.x | 16–18 | 5.x | `release/v2` | `angular16-18` |
 | 1.x | 13–15 | 4.x | `release/v1` | `angular13-15` |
 
-## 3.0.0 - Unreleased
+## 3.0.1 - 2026-11-22
+
+- Docs: link to the live demo (https://ahasan09.github.io/angular-signature-pad/) in the README.
+- Releases are published with npm trusted publishing (no npm token). No code changes.
+
+## 3.0.0 - 2026-11-22
 
 First release of `@raju_hasan09/ngx-signature-pad` 3.x (Angular 19–22).
 
@@ -43,10 +48,10 @@ First release of `@raju_hasan09/ngx-signature-pad` 3.x (Angular 19–22).
 - Workspace on Angular 22.3, TypeScript 6, `@angular/build`, ESLint flat config; `npm audit` reports 0 vulnerabilities.
 - CI runs on `main` with Node 22 (audit, lint, tests, library and demo builds, package check). Publishing verifies tag, version and release line, and adds npm provenance.
 
-## 2.0.0 - Unreleased (branch `release/v2`)
+## 2.0.0 - 2026-11-22 (branch `release/v2`)
 
 First release of the 2.x line for Angular 16–18 with signature_pad 5. Same features and template API as 3.0.0, using `@Input` / `@Output` decorators. See the `release/v2` branch's CHANGELOG.
 
-## 1.0.0 - Unreleased (branch `release/v1`)
+## 1.0.0 - 2026-11-22 (branch `release/v1`)
 
 First release of the 1.x line for Angular 13–15 with signature_pad 4. NgModule-based (`SignaturePadModule`); `beginStroke` / `endStroke` emit signature_pad 4's raw `PointerEvent | MouseEvent | Touch`. See the `release/v1` branch's CHANGELOG.
