@@ -1,0 +1,36 @@
+{
+  "name": "@raju_hasan09/ngx-signature-pad",
+  "version": "1.0.0",
+  "description": "Angular component wrapper for szimek/signature_pad — capture handwritten signatures on a canvas.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahasan09/angular-signature-pad.git"
+  },
+  "keywords": [
+    "angular",
+    "signature",
+    "signature-pad",
+    "sign",
+    "canvas",
+    "standalone",
+    "drawing"
+  ],
+  "author": "Abul Hasan <abulhasanraju@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ahasan09/angular-signature-pad/issues"
+  },
+  "homepage": "https://github.com/ahasan09/angular-signature-pad#readme",
+  "peerDependencies": {
+    "@angular/common": "^13.0.0 || ^14.0.0 || ^15.0.0",
+    "@angular/core": "^13.0.0 || ^14.0.0 || ^15.0.0",
+    "signature_pad": "^4.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}
