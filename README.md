@@ -51,9 +51,15 @@ Each release branch has the same check for its own Angular range.
 
 1. On the line's branch, bump `version` in `projects/ngx-signature-pad/package.json` and add a `CHANGELOG.md` entry.
 2. Commit, then tag `vX.Y.Z` on that branch (it must match the version) and push the tag.
-3. That branch's `Publish` workflow tests, builds and publishes with npm provenance, under the line's dist-tag. It refuses to publish if the tag, version or release line don't match. It needs the `NPM_TOKEN` repository secret.
+3. That branch's `Publish` workflow tests, builds and publishes with npm provenance, under the line's dist-tag. It refuses to publish if the tag, version or release line don't match.
 
 `latest` must always point to the newest line, which is why the older lines publish under their own dist-tags.
+
+### Trusted publishing
+
+All three publish workflows use npm [trusted publishing](https://docs.npmjs.com/trusted-publishers/): npm exchanges the workflow's GitHub identity token for a short-lived publish credential, so no npm token is stored in the repository. Each line builds and tests on its own Node version, then publishes with Node 24 and npm 11 (trusted publishing needs npm 11.5.1+ and Node 22.14+).
+
+It is configured once on npmjs.com, under the package's settings: a GitHub Actions trusted publisher for `ahasan09/angular-signature-pad` with workflow `publish.yml`, allowed to publish directly. All three branches share that workflow file name, so the one entry covers every line.
 
 ## License
 

@@ -43,7 +43,7 @@ npm run audit
 
 ## Key Notes
 - Published as `@raju_hasan09/ngx-signature-pad`; it replaces `ahasan-angular2-signaturepad` (1.0.0, Angular 12–13). Publish from the npm account `raju_hasan09`; the old package belongs to the npm account `ahasan09`, which the owner can no longer access, so it is not deprecated. Not `angular2-signaturepad`, which is a different author's package.
-- Releases: bump the library package.json version on the line's branch, then push a `vX.Y.Z` tag. Each branch's `publish.yml` checks tag = version and the major = that branch's line, and publishes under its dist-tag. Only 3.x may be `latest`.
+- Releases: bump the library package.json version on the line's branch, then push a `vX.Y.Z` tag. Each branch's `publish.yml` checks tag = version and the major = that branch's line, and publishes under its dist-tag. Only 3.x may be `latest`. Publishing uses npm trusted publishing (OIDC, no token): the publish step runs on Node 24 + npm 11 even on old lines; the npm trusted publisher is configured for workflow `publish.yml`.
 - Supporting Angular 19–22 means using only APIs stable in 19 in the library (input/output/viewChild/computed are fine).
 - signature_pad 5 is an EventTarget: use `addEventListener('beginStroke' | 'endStroke')`, not `onBegin`/`onEnd`. Its canvas is private; use the component's own `canvasRef`.
 - signature_pad 5 types need TypeScript ≥5.0 (Angular 16+); that's why 1.x uses signature_pad 4.
