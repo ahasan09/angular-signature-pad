@@ -62,3 +62,5 @@ img { display: block; max-width: 100%; background: var(--paper); border-radius: 
 .log { margin: 0; padding-left: 20px; font: 0.85rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 480px) { .spacer { display: none; } .pad-frame { height: 200px; } }
+.links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; font-size: 0.9rem; }
+.links code { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; color: var(--ink); overflow-wrap: anywhere; }

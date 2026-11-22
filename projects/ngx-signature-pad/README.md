@@ -2,6 +2,8 @@
 
 Angular component for capturing handwritten signatures on a `<canvas>`, powered by [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
 
+**[Live demo](https://ahasan09.github.io/angular-signature-pad/)**: draw, undo, export PNG/SVG and watch the stroke events.
+
 - Standalone component (plus `SignaturePadModule` for NgModule apps), OnPush, SSR-safe (does nothing on the server)
 - Pointer, mouse and touch input; export as PNG, JPEG, SVG or point data
 - Drawing runs outside the Angular zone, so strokes don't trigger change detection; works in zoneless apps
