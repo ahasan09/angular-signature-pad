@@ -34,7 +34,9 @@ jobs:
         run: npm run build
 
       - name: Pack library
-        run: npm pack ./dist/ngx-signature-pad --pack-destination "$RUNNER_TEMP/pkg"
+        run: |
+          mkdir -p "$RUNNER_TEMP/pkg"
+          npm pack ./dist/ngx-signature-pad --pack-destination "$RUNNER_TEMP/pkg"
 
       - name: Upload package
         uses: actions/upload-artifact@v4
