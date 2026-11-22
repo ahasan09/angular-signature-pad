@@ -1,44 +1,12 @@
-# ahasan-angular2-signaturepad
+# @raju_hasan09/ngx-signature-pad — 2.x line (branch release/v2)
 
-Angular 13 library workspace that wraps szimek/signature_pad as a reusable Angular component for canvas-based signature capture.
-
-## Tech Stack
-- Angular 13 / TypeScript
-- signature_pad 2.x (canvas drawing library)
-- ng-packagr (library build tooling)
-- Karma + Jasmine (unit tests)
-- RxJS 6
-
-## Project Structure
-```
-ahasan-angular2-signaturepad/
-  projects/
-    ahasan-angular2-signaturepad/   # Angular library source
-      src/lib/                      # SignaturePad component/module
-      public-api.ts                 # Public exports
-      ng-package.json
-  signature-pad.ts                  # Legacy root-level component (not active)
-  index.ts                          # Legacy root-level export (not active)
-  angular.json
-  package.json
-```
-
-## Development
-```bash
-# Install dependencies
-npm install
-
-# Run demo app
-npm start
-
-# Build the library
-npm run build
-
-# Run unit tests
-npm test
-```
+Maintenance branch for Angular 16–18 with signature_pad 5.x. The newest line (3.x, Angular 19–22) and the release overview live on `main`.
 
 ## Key Notes
-- Active library source is under `projects/ahasan-angular2-signaturepad/`; root-level `signature-pad.ts` and `index.ts` are legacy files.
-- Published to npm as `angular2-signaturepad` — import `SignaturePadModule` to use.
-- Library is no longer actively maintained upstream; expect potential compatibility issues with newer Angular versions.
+- Build with Angular 16.2 (oldest in range) so the partial-compiled package works on all of 16–18. Peer range: Angular 16–18, signature_pad 5.x.
+- Node 18 (`.nvmrc`); it also builds on Node 20 locally.
+- Publishes under the `angular16-18` dist-tag, never `latest`. `publish.yml` checks that the tag, the version and the 2.x line match.
+- Fixes land on `main` first, then get ported here. Keep the template API (selector, inputs, outputs, methods) identical to main.
+- Tests use the real signature_pad with dispatched PointerEvents (Karma + Jasmine). Don't mock the library.
+- `npm audit --omit=dev` must stay clean (runtime deps are only signature_pad + tslib); the EOL toolchain's dev advisories are expected.
+- `scripts/compat` + `.github/workflows/compat.yml` verify the packed tarball in real apps on every Angular version of this line. Keep the matrix in sync with peerDependencies.

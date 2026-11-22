@@ -1,15 +1,16 @@
-name: CI
+name: CI (2.x, Angular 16-18)
 
 on:
   push:
-    branches:
-      - master
+    branches: [release/v2]
   pull_request:
-    branches:
-      - master
+    branches: [release/v2]
+
+permissions:
+  contents: read
 
 jobs:
-  build-test-lint:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,17 +20,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      # Only the published runtime dependencies (signature_pad, tslib) are audited.
+      # The Angular 16-18 build toolchain is end-of-life and has known, unfixable advisories.
+      - name: Audit published dependencies
+        run: npm audit --omit=dev --audit-level=moderate
+
+      - name: Run tests
+        run: npm test
 
       - name: Build library
         run: npm run build
 
-      - name: Run tests
-        run: npm test
+      - name: Check package contents
+        run: npm pack --dry-run ./dist/ngx-signature-pad

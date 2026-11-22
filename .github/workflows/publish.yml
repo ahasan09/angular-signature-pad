@@ -1,13 +1,21 @@
-name: Publish
+name: Publish (2.x, Angular 16-18)
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v2.*'
+
+permissions:
+  contents: read
+  id-token: write # npm provenance
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      # Older release line: publish under its own dist-tag so "latest" stays on the newest line.
+      RELEASE_MAJOR: "2"
+      DIST_TAG: angular16-18
 
     steps:
       - name: Checkout
@@ -16,17 +24,35 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
           registry-url: https://registry.npmjs.org
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify tag matches library version and release line
+        run: |
+          LIB_VERSION=$(node -p "require('./projects/ngx-signature-pad/package.json').version")
+          if [ "v$LIB_VERSION" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match library version v$LIB_VERSION" >&2
+            exit 1
+          fi
+          if [ "${LIB_VERSION%%.*}" != "$RELEASE_MAJOR" ]; then
+            echo "This branch publishes $RELEASE_MAJOR.x only (got $LIB_VERSION)" >&2
+            exit 1
+          fi
+
+      - name: Audit published dependencies
+        run: npm audit --omit=dev --audit-level=moderate
+
+      - name: Run tests
+        run: npm test
+
       - name: Build library
         run: npm run build
 
       - name: Publish package
-        run: npm publish dist/ahasan-angular2-signaturepad --access public
+        run: npm publish ./dist/ngx-signature-pad --access public --provenance --tag "$DIST_TAG"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

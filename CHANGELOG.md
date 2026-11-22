@@ -1,26 +1,13 @@
-# Changelog
+# Changelog — @raju_hasan09/ngx-signature-pad 2.x (Angular 16–18)
 
-## 3.0.0 - 2026-07-11
-- Upgrade to Angular 22 (from 19); TypeScript 6, zone.js 0.16
-- signature_pad 5.1.3; ng-packagr 22
-- Widen library peerDependencies to Angular >=19
-- Migrate to ESLint flat config (eslint 10, angular-eslint 22, typescript-eslint 8)
+This branch (`release/v2`) maintains the 2.x line for Angular 16–18 with signature_pad 5.x. It publishes to npm under the `angular16-18` dist-tag; the newest line (3.x, Angular 19–22) lives on `main` and is `latest`.
 
+## 2.0.0 - Unreleased
 
-## 2.0.0 - 2026-04-28
+First release of the 2.x line. Replaces `ahasan-angular2-signaturepad` for apps on Angular 16–18.
 
-### Added
-- Standalone Angular component API and typed signature configuration export.
-- Accessibility attributes for the canvas (`role="img"`, configurable `aria-label`).
-- Expanded unit tests for `clear`, `isEmpty`, `fromDataURL`, `toDataURL`, and input bindings.
-- ESLint configuration using Angular ESLint rules.
-- GitHub Actions CI for build/test/lint and npm publish on version tags.
-
-### Changed
-- Upgraded Angular toolchain to v19.
-- Upgraded `signature_pad` to v5.
-- Enabled strict TypeScript and Angular template checks.
-- Updated package versions and README usage examples.
-
-### Removed
-- NgModule export from the public API in favor of standalone component usage.
+- Same features, fixes and template API as 3.0.0 (see `main`), using `@Input()` / `@Output()` decorators instead of signal inputs/outputs.
+- Standalone `SignaturePadComponent` plus `SignaturePadModule`.
+- `beginStroke` / `endStroke` emit signature_pad 5's `SignatureStrokeEvent` (`{ event, type, x, y, pressure }`).
+- Built with Angular 16.2 (partial compilation); verified in apps on Angular 16, 17 and 18.
+- Tests: Karma + Jasmine in headless Chrome against the real signature_pad (coverage gate ≥95% lines).
