@@ -1,53 +1,55 @@
 # @raju_hasan09/ngx-signature-pad
 
-Angular library workspace that wraps szimek/signature_pad as an Angular component for canvas-based signature capture. This branch (`main`) is the 3.x line.
+Angular component wrapping [szimek/signature_pad](https://github.com/szimek/signature_pad) for canvas signature capture. This branch (`main`) is the 3.x line.
 
 ## Release lines
-| Line | Angular | signature_pad | Branch | dist-tag |
-| --- | --- | --- | --- | --- |
-| 3.x | 19–22 | 5.x | `main` | `latest` |
-| 2.x | 16–18 | 5.x | `release/v2` | `angular16-18` |
-| 1.x | 13–15 | 4.x | `release/v1` | `angular13-15` |
+| Line | Angular | signature_pad | Branch | npm dist-tag | Build toolchain |
+| --- | --- | --- | --- | --- | --- |
+| 3.x | 19–22 | 5.x | `main` | `latest` | Angular 22, Node 22, Vitest |
+| 2.x | 16–18 | 5.x | `release/v2` | `angular16-18` | Angular 16, Node 18, Karma |
+| 1.x | 13–15 | 4.x | `release/v1` | `angular13-15` | Angular 13, Node 16, Karma |
 
-Each line is built with the oldest Angular in its range. Fixes land on `main` first, then get ported; keep the template API (selector, inputs, outputs, methods) identical across lines.
+- Each line builds with the oldest Angular in its range, so the partial-compiled package works on every version in it.
+- Fixes land on `main` first, then get ported. The template API (selector, inputs, outputs, methods) is identical across lines.
+- Only 3.x is `latest`; older lines publish under their own dist-tag.
 
-## Tech Stack (3.x)
-- Angular 22 / TypeScript 6 workspace; library peerDependencies Angular ^19–^22
-- signature_pad 5.x (peer dependency)
-- ng-packagr via `@angular/build:ng-packagr`
-- Vitest browser mode (Playwright Chromium) via `@angular/build:unit-test`
-
-## Project Structure
+## Structure
 ```
-projects/ngx-signature-pad/   # the published library
+projects/ngx-signature-pad/   # published library
   src/lib/signature-pad.component.ts   # SignaturePadComponent (alias SignaturePad) + SignaturePadModule
-  src/lib/signature-pad.component.spec.ts
-  src/public-api.ts
-  package.json        # published package metadata/version (source of truth for releases)
-  README.md           # published to npm
-projects/demo/        # demo app (`npm start`), compiles the library from source via tsconfig paths
-angular.json
-package.json          # private workspace (dev tooling only)
+  package.json                         # published name/version
+  README.md                            # npm README
+projects/demo/                # demo app; imports the library source via tsconfig paths
+scripts/compat/               # builds a real app on a given Angular version and draws on it
+.github/workflows/            # ci, compat (Angular version matrix), publish (tags), demo (GitHub Pages)
 ```
 
-## Development
+## Commands
 ```bash
-npm ci
-npx playwright install chromium
-npm start       # demo app
-npm test        # Vitest + Chromium; coverage thresholds in angular.json
+npm ci && npx playwright install chromium
+npm start           # demo at http://localhost:4200
+npm test            # Vitest browser mode in Chromium; coverage thresholds in angular.json
 npm run lint
-npm run build   # production/partial build -> dist/ngx-signature-pad
+npm run build       # partial-Ivy build -> dist/ngx-signature-pad
+npm run build:demo
 npm run audit
 ```
+- Angular 22's CLI needs Node ^22.22.3, ^24.15 or ≥26.
+- Compat check for one version: `npm pack ./dist/ngx-signature-pad --pack-destination <dir>` (the dir must exist), then `bash scripts/compat/make-app.sh <ng> "<ts>" <app-dir> <tgz> "<signature_pad>" <signals|standalone|standalone-module|module> <zone|zoneless>` and `node scripts/compat/check-app.cjs <app-dir>/dist`.
 
-## Key Notes
-- Published as `@raju_hasan09/ngx-signature-pad`; it replaces `ahasan-angular2-signaturepad` (1.0.0, Angular 12–13). Publish from the npm account `raju_hasan09`; the old package belongs to the npm account `ahasan09`, which the owner can no longer access, so it is not deprecated. Not `angular2-signaturepad`, which is a different author's package.
-- Releases: bump the library package.json version on the line's branch, then push a `vX.Y.Z` tag. Each branch's `publish.yml` checks tag = version and the major = that branch's line, and publishes under its dist-tag. Only 3.x may be `latest`. Publishing uses npm trusted publishing (OIDC, no token): the publish step runs on Node 24 + npm 11 even on old lines; the npm trusted publisher is configured for workflow `publish.yml`.
-- Supporting Angular 19–22 means using only APIs stable in 19 in the library (input/output/viewChild/computed are fine).
-- signature_pad 5 is an EventTarget: use `addEventListener('beginStroke' | 'endStroke')`, not `onBegin`/`onEnd`. Its canvas is private; use the component's own `canvasRef`.
-- signature_pad 5 types need TypeScript ≥5.0 (Angular 16+); that's why 1.x uses signature_pad 4.
-- Angular 22 defaults to OnPush and zoneless. The component uses signal inputs and `output()`, and sets OnPush explicitly. Test hosts use signals; one test block uses `provideZoneChangeDetection()` to cover zone.js apps.
-- signature_pad `SignatureEvent.x/y` are `clientX/clientY` (viewport), not canvas coordinates.
-- Tests use the real signature_pad with dispatched PointerEvents. Don't mock the library; mocks hid the v5 API breakage before.
-- `scripts/compat` + `.github/workflows/compat.yml` verify the packed tarball in real apps on every Angular version of the line (strict build + drawing in Chromium). Keep each branch's matrix in sync with its peerDependencies.
+## Conventions
+- Library code uses only APIs stable in Angular 19: signal `input()`/`output()`/`viewChild()`/`computed()`, explicit `ChangeDetectionStrategy.OnPush`.
+- signature_pad is an EventTarget: listen to `beginStroke`/`endStroke`; its canvas is private, so use the component's `canvasRef`. Event `x`/`y` are viewport (`clientX`/`clientY`) coordinates.
+- Tests drive the real signature_pad with dispatched PointerEvents; never mock it. Test hosts use signals (Angular 22 defaults to OnPush and zoneless); one block covers zone.js via `provideZoneChangeDetection()`.
+- Keep each branch's compat matrix in sync with its peerDependencies.
+
+## Releasing
+1. Bump `version` in `projects/ngx-signature-pad/package.json` and root `package.json`, run `npm install --package-lock-only`, add a CHANGELOG entry; squash-merge the PR.
+2. Tag `vX.Y.Z` on the line's branch and push the tag. `publish.yml` checks tag = version = line, then publishes with npm trusted publishing (OIDC; publish step on Node 24 + npm 11).
+3. Verify: `npm view @raju_hasan09/ngx-signature-pad@X.Y.Z _npmUser` shows `GitHub Actions`.
+
+- npm account `raju_hasan09`; the trusted publisher is repo `ahasan09/angular-signature-pad`, workflow `publish.yml`. Publishing access disallows tokens.
+- Publish with `npm publish ./dist/ngx-signature-pad`: the `./` keeps npm from reading the path as a GitHub shorthand.
+- Version `0.0.0-stage` on npm is npm's staged-publishing placeholder.
+- `demo.yml` deploys the demo to https://ahasan09.github.io/angular-signature-pad/ on every push to `main`.
+- PRs are squash-merged and head branches are auto-deleted. Pull local `release/vN` before porting.
