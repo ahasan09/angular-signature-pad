@@ -1,4 +1,4 @@
-# @ahasan09/ngx-signature-pad
+# @raju_hasan09/ngx-signature-pad
 
 Angular component for capturing handwritten signatures on a `<canvas>`, powered by [szimek/signature_pad](https://www.npmjs.com/package/signature_pad).
 
@@ -12,9 +12,9 @@ Pick the version that matches your Angular version:
 
 | Package | Angular | signature_pad | Install |
 | --- | --- | --- | --- |
-| 3.x | 19, 20, 21, 22 | 5.x | `npm i @ahasan09/ngx-signature-pad@3 signature_pad@5` |
-| 2.x | 16, 17, 18 | 5.x | `npm i @ahasan09/ngx-signature-pad@2 signature_pad@5` |
-| **1.x** | 13, 14, 15 | 4.x | `npm i @ahasan09/ngx-signature-pad@1 signature_pad@4` |
+| 3.x | 19, 20, 21, 22 | 5.x | `npm i @raju_hasan09/ngx-signature-pad@3 signature_pad@5` |
+| 2.x | 16, 17, 18 | 5.x | `npm i @raju_hasan09/ngx-signature-pad@2 signature_pad@5` |
+| **1.x** | 13, 14, 15 | 4.x | `npm i @raju_hasan09/ngx-signature-pad@1 signature_pad@4` |
 
 All three have the same template API (`<signature-pad>`, inputs, outputs and methods below). Differences:
 
@@ -26,7 +26,7 @@ This README describes **1.x** (Angular 13–15, signature_pad 4).
 ## Install
 
 ```bash
-npm install @ahasan09/ngx-signature-pad@1 signature_pad@4
+npm install @raju_hasan09/ngx-signature-pad@1 signature_pad@4
 ```
 
 `signature_pad` is a peer dependency and must be installed alongside the component.
@@ -40,7 +40,7 @@ import {
   SignaturePadConfig,
   SignaturePadModule,
   SignatureStrokeEvent,
-} from '@ahasan09/ngx-signature-pad';
+} from '@raju_hasan09/ngx-signature-pad';
 
 @Component({
   selector: 'app-sign',
@@ -141,7 +141,7 @@ onResize(): void {
 This package replaces `ahasan-angular2-signaturepad` (last release 1.0.0, Angular 12–13, signature_pad 2).
 
 1. `npm uninstall ahasan-angular2-signaturepad` and install the version for your Angular version (table above), with the matching `signature_pad`.
-2. Change imports from `'ahasan-angular2-signaturepad'` to `'@ahasan09/ngx-signature-pad'`. `SignaturePadModule` and the `<signature-pad>` tag still work. Upgrade `signature_pad` from 2.x to 4.x.
+2. Change imports from `'ahasan-angular2-signaturepad'` to `'@raju_hasan09/ngx-signature-pad'`. `SignaturePadModule` and the `<signature-pad>` tag still work. Upgrade `signature_pad` from 2.x to 4.x.
 3. `PointGroup` is now signature_pad's `{ points, penColor, ... }` instead of `Point[]`. Signatures saved with the old `toData()` must be converted before `fromData()`.
 4. `fromDataURL()` returns a `Promise<void>`.
 5. Optional: switch from `onBeginEvent` / `onEndEvent` to `beginStroke` / `endStroke`.

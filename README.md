@@ -1,6 +1,6 @@
 # Angular Signature Pad — 1.x (Angular 13–15)
 
-This is the `release/v1` branch of [`@ahasan09/ngx-signature-pad`](https://www.npmjs.com/package/@ahasan09/ngx-signature-pad). It maintains the **1.x** line for **Angular 13–15** with **signature_pad 4.x**.
+This is the `release/v1` branch of [`@raju_hasan09/ngx-signature-pad`](https://www.npmjs.com/package/@raju_hasan09/ngx-signature-pad). It maintains the **1.x** line for **Angular 13–15** with **signature_pad 4.x**.
 
 The newest line (3.x, Angular 19–22) is on `main`, which also documents all release lines and the release process.
 

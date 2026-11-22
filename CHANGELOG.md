@@ -1,4 +1,4 @@
-# Changelog — @ahasan09/ngx-signature-pad 1.x (Angular 13–15)
+# Changelog — @raju_hasan09/ngx-signature-pad 1.x (Angular 13–15)
 
 This branch (`release/v1`) maintains the 1.x line for Angular 13–15 with signature_pad 4.x. It publishes to npm under the `angular13-15` dist-tag; the newest line (3.x, Angular 19–22) lives on `main` and is `latest`.
 

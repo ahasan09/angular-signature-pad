@@ -2,7 +2,7 @@
   "name": "angular-signature-pad",
   "version": "1.0.0",
   "private": true,
-  "description": "Workspace for @ahasan09/ngx-signature-pad 1.x (Angular 13-15)",
+  "description": "Workspace for @raju_hasan09/ngx-signature-pad 1.x (Angular 13-15)",
   "scripts": {
     "ng": "ng",
     "build": "ng build ngx-signature-pad --configuration production",
