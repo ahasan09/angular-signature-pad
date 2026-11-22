@@ -1,0 +1,107 @@
+name: Compatibility (1.x, Angular 13-15)
+
+# Builds the library once, then installs the packed tarball into a fresh app on
+# every Angular version this line supports, builds it with strict type checking,
+# and draws on it in a real browser (scripts/compat).
+
+on:
+  push:
+    branches: [release/v1]
+  pull_request:
+    branches: [release/v1]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build library
+        run: npm run build
+
+      - name: Pack library
+        run: npm pack ./dist/ngx-signature-pad --pack-destination "$RUNNER_TEMP/pkg"
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: ${{ runner.temp }}/pkg/*.tgz
+
+  app:
+    needs: pack
+    runs-on: ubuntu-latest
+    name: Angular ${{ matrix.angular }} (${{ matrix.style }}, ${{ matrix.change_detection }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - angular: 13
+            typescript: "~4.6.4"
+            node: 16
+            signature_pad: "^4.0.0"
+            style: module
+            change_detection: zone
+          - angular: 14
+            typescript: "~4.8.4"
+            node: 16
+            signature_pad: "^4.0.0"
+            style: module
+            change_detection: zone
+          - angular: 15
+            typescript: "~4.9.5"
+            node: 18
+            signature_pad: "^4.0.0"
+            style: standalone-module
+            change_detection: zone
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download package
+        uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: ${{ runner.temp }}/pkg
+
+      - name: Setup Node.js ${{ matrix.node }} (for Angular ${{ matrix.angular }})
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Build app on Angular ${{ matrix.angular }}
+        run: |
+          bash scripts/compat/make-app.sh ${{ matrix.angular }} "${{ matrix.typescript }}" "$RUNNER_TEMP/app" \
+            "$(ls "$RUNNER_TEMP"/pkg/*.tgz)" "${{ matrix.signature_pad }}" ${{ matrix.style }} ${{ matrix.change_detection }}
+
+      # Playwright needs a current Node.js, independent of the app's Node version.
+      - name: Setup Node.js 22 (for Playwright)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          mkdir -p "$RUNNER_TEMP/pw" && cd "$RUNNER_TEMP/pw"
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: Draw on the app in Chromium
+        env:
+          PLAYWRIGHT_DIR: ${{ runner.temp }}/pw
+        run: node scripts/compat/check-app.cjs "$RUNNER_TEMP/app/dist"

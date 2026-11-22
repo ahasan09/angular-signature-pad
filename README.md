@@ -1,108 +1,32 @@
-# Angular Signature Pad
+# Angular Signature Pad — 1.x (Angular 13–15)
 
-An Angular component that provides a signature drawing canvas powered by [szimek/signature_pad](https://www.npmjs.com/package/signature_pad). Allows users to draw, capture, and export handwritten signatures as base64 images.
+This is the `release/v1` branch of [`@ahasan09/ngx-signature-pad`](https://www.npmjs.com/package/@ahasan09/ngx-signature-pad). It maintains the **1.x** line for **Angular 13–15** with **signature_pad 4.x**.
 
-## Features
+The newest line (3.x, Angular 19–22) is on `main`, which also documents all release lines and the release process.
 
-- Smooth signature drawing on a `<canvas>` element
-- Configurable canvas dimensions
-- Export signature as PNG/JPEG data URL
-- Clear the canvas programmatically
-- Angular 22+ compatible
+For installation, usage and the API, see the [library README](projects/ngx-signature-pad/README.md). It is also the README published to npm for 1.x.
 
-## Tech Stack
+## Development
 
-- Angular 22+
-- TypeScript
-- signature_pad
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) v10+
-- Angular CLI: `npm install -g @angular/cli`
-
-## Getting Started
+Use Node 16 (`nvm use` reads `.nvmrc`). The library is built with Angular 13.4, the oldest version in its range, so the package works on every Angular version in 13–15.
 
 ```bash
-git clone https://github.com/ahasan09/angular-signature-pad
-cd angular-signature-pad
-npm install
-ng serve
+npm ci
+npm test         # Karma + Jasmine in headless Chrome, with coverage gate
+npm run build    # production (partial-Ivy) build to dist/ngx-signature-pad
+npm run audit    # audits the published runtime dependencies (signature_pad, tslib)
 ```
 
-Open [http://localhost:4200](http://localhost:4200).
+CI also runs `.github/workflows/compat.yml`: it installs the packed library into a fresh app on each Angular version in this range, builds it with strict type checking, and draws on it in Chromium (`scripts/compat`).
 
-## Usage in Your Project
+The Angular 13–15 build toolchain is past end-of-life and `npm audit` reports advisories in it that have no fix. They don't ship: the published package depends only on `signature_pad` (peer) and `tslib`.
 
-### 1. Install
+## Releasing
 
-```bash
-npm install angular2-signaturepad --save
-```
+1. Bump `version` in `projects/ngx-signature-pad/package.json` (it must stay 1.x) and add a `CHANGELOG.md` entry.
+2. Commit on this branch, tag `v1.Y.Z`, and push the tag.
+3. The `Publish` workflow tests, builds and publishes with npm provenance under the `angular13-15` dist-tag.
 
-### 2. Import the standalone component
+## License
 
-```typescript
-import { SignaturePad } from 'angular2-signaturepad';
-
-@Component({
-  standalone: true,
-  imports: [ SignaturePad ],
-})
-export class AppComponent {}
-```
-
-### 3. Use in a component
-
-```typescript
-import { Component, ViewChild } from '@angular/core';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
-
-@Component({
-  template: `
-    <signature-pad
-      [options]="signaturePadOptions"
-      (onBeginEvent)="drawStart()"
-      (onEndEvent)="drawComplete()">
-    </signature-pad>
-    <button (click)="clear()">Clear</button>
-    <button (click)="save()">Save</button>
-  `
-})
-export class MyComponent {
-  @ViewChild(SignaturePad) signaturePad: SignaturePad;
-
-  signaturePadOptions = {
-    minWidth: 2,
-    canvasWidth: 500,
-    canvasHeight: 300
-  };
-
-  drawComplete() {
-    console.log(this.signaturePad.toDataURL()); // base64 PNG
-  }
-
-  clear() {
-    this.signaturePad.clear();
-  }
-
-  save() {
-    const dataURL = this.signaturePad.toDataURL('image/jpeg');
-    // upload or use dataURL
-  }
-}
-```
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `ng serve` | Start dev server on port 4200 |
-| `ng build --prod` | Production build |
-| `ng test` | Run unit tests |
-
-## Additional Resources
-
-- Changelog: `CHANGELOG.md`
-- Library README: `projects/ahasan-angular2-signaturepad/README.md`
-- StackBlitz demo: https://stackblitz.com/edit/angular-signature-pad-demo
+MIT
