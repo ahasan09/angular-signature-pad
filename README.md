@@ -1,108 +1,60 @@
 # Angular Signature Pad
 
-An Angular component that provides a signature drawing canvas powered by [szimek/signature_pad](https://www.npmjs.com/package/signature_pad). Allows users to draw, capture, and export handwritten signatures as base64 images.
+Source for **[`@raju_hasan09/ngx-signature-pad`](https://www.npmjs.com/package/@raju_hasan09/ngx-signature-pad)**, an Angular component wrapping [szimek/signature_pad](https://www.npmjs.com/package/signature_pad). It replaces `ahasan-angular2-signaturepad`.
 
-## Features
+For installation, usage and the API, see the [library README](projects/ngx-signature-pad/README.md). It is also the README published to npm.
 
-- Smooth signature drawing on a `<canvas>` element
-- Configurable canvas dimensions
-- Export signature as PNG/JPEG data URL
-- Clear the canvas programmatically
-- Angular 22+ compatible
+## Release lines
 
-## Tech Stack
+| Line | Angular | signature_pad | Branch | npm dist-tag | Build / test toolchain |
+| --- | --- | --- | --- | --- | --- |
+| **3.x** | 19–22 | 5.x | `main` | `latest` | Angular 22, Node 22, Vitest |
+| 2.x | 16–18 | 5.x | `release/v2` | `angular16-18` | Angular 16, Node 18, Karma |
+| 1.x | 13–15 | 4.x | `release/v1` | `angular13-15` | Angular 13, Node 16, Karma |
 
-- Angular 22+
-- TypeScript
-- signature_pad
+Each line is built with the **oldest** Angular version in its range, so the compiled package works on every newer version in that range. Bug fixes land on `main` first and are ported to the release branches.
 
-## Prerequisites
+## Development (3.x, this branch)
 
-- [Node.js](https://nodejs.org/) v10+
-- Angular CLI: `npm install -g @angular/cli`
-
-## Getting Started
+Requires Node.js `^22.22.3 || ^24.15.0 || >=26` (same as Angular 22).
 
 ```bash
-git clone https://github.com/ahasan09/angular-signature-pad
-cd angular-signature-pad
-npm install
-ng serve
+npm ci
+npx playwright install chromium   # once: browser for the tests
+
+npm start          # demo app at http://localhost:4200 (uses the library source, no build needed)
+npm test           # Vitest in headless Chromium, with coverage gate
+npm run test:watch
+npm run lint
+npm run build      # production (partial-Ivy) build to dist/ngx-signature-pad
+npm run build:demo
+npm run audit
 ```
 
-Open [http://localhost:4200](http://localhost:4200).
+The tests use Vitest browser mode (Playwright Chromium) through Angular's `@angular/build:unit-test` builder. They drive the real `signature_pad` with pointer events, because canvas rendering is part of what they check.
 
-## Usage in Your Project
+The demo app (`projects/demo`) shows pen colour and width, undo, read-only mode, PNG/SVG export and the live `beginStroke`/`endStroke` events.
 
-### 1. Install
+### Compatibility check
+
+CI (`.github/workflows/compat.yml`) installs the packed library into a fresh app on every Angular version this line supports, builds it with strict type checking, and draws on it in Chromium. To run one version locally:
 
 ```bash
-npm install angular2-signaturepad --save
+npm run build && npm pack ./dist/ngx-signature-pad --pack-destination /tmp
+bash scripts/compat/make-app.sh 20 "~5.8.0" /tmp/app-ng20 /tmp/raju_hasan09-ngx-signature-pad-3.0.0.tgz "^5.0.0" signals zone
+node scripts/compat/check-app.cjs /tmp/app-ng20/dist
 ```
 
-### 2. Import the standalone component
+Each release branch has the same check for its own Angular range.
 
-```typescript
-import { SignaturePad } from 'angular2-signaturepad';
+## Releasing
 
-@Component({
-  standalone: true,
-  imports: [ SignaturePad ],
-})
-export class AppComponent {}
-```
+1. On the line's branch, bump `version` in `projects/ngx-signature-pad/package.json` and add a `CHANGELOG.md` entry.
+2. Commit, then tag `vX.Y.Z` on that branch (it must match the version) and push the tag.
+3. That branch's `Publish` workflow tests, builds and publishes with npm provenance, under the line's dist-tag. It refuses to publish if the tag, version or release line don't match. It needs the `NPM_TOKEN` repository secret.
 
-### 3. Use in a component
+`latest` must always point to the newest line, which is why the older lines publish under their own dist-tags.
 
-```typescript
-import { Component, ViewChild } from '@angular/core';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+## License
 
-@Component({
-  template: `
-    <signature-pad
-      [options]="signaturePadOptions"
-      (onBeginEvent)="drawStart()"
-      (onEndEvent)="drawComplete()">
-    </signature-pad>
-    <button (click)="clear()">Clear</button>
-    <button (click)="save()">Save</button>
-  `
-})
-export class MyComponent {
-  @ViewChild(SignaturePad) signaturePad: SignaturePad;
-
-  signaturePadOptions = {
-    minWidth: 2,
-    canvasWidth: 500,
-    canvasHeight: 300
-  };
-
-  drawComplete() {
-    console.log(this.signaturePad.toDataURL()); // base64 PNG
-  }
-
-  clear() {
-    this.signaturePad.clear();
-  }
-
-  save() {
-    const dataURL = this.signaturePad.toDataURL('image/jpeg');
-    // upload or use dataURL
-  }
-}
-```
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `ng serve` | Start dev server on port 4200 |
-| `ng build --prod` | Production build |
-| `ng test` | Run unit tests |
-
-## Additional Resources
-
-- Changelog: `CHANGELOG.md`
-- Library README: `projects/ahasan-angular2-signaturepad/README.md`
-- StackBlitz demo: https://stackblitz.com/edit/angular-signature-pad-demo
+MIT

@@ -1,0 +1,12 @@
+/* The demo compiles the library from source, so `npm start` needs no prior build. */
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/demo",
+    "types": [],
+    "paths": {
+      "@raju_hasan09/ngx-signature-pad": ["projects/ngx-signature-pad/src/public-api.ts"]
+    }
+  },
+  "files": ["src/main.ts"]
+}
